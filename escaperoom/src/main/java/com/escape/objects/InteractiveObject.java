@@ -1,4 +1,4 @@
-package com.escape.gameExec;
+package com.escape.objects;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

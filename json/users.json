@@ -1,0 +1,94 @@
+{
+  "users": [
+    {
+      "userId": "550e8400-e29b-41d4-a716-446655440000",
+      "username": "Player1",
+      "password": "hashed_password_123",
+      "level": 1,
+      "currentRoomId": "room_library",
+      "playerState": {
+        "worldX": 1104,
+        "worldY": 1104,
+        "speed": 4,
+        "direction": "down",
+        "solidArea": {
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "collisionOn": false,
+        "spriteImages": {
+          "u1": "/images/player.png",
+          "u2": "/images/player.png",
+          "d1": "/images/player.png",
+          "d2": "/images/player.png",
+          "l1": "/images/player.png",
+          "l2": "/images/player.png",
+          "r1": "/images/player.png",
+          "r2": "/images/player.png"
+        }
+      },
+      "inventory": {
+        "inventoryId": "inv_001",
+        "maxCapacity": 10,
+        "items": [
+          {
+            "itemID": "550e8400-e29b-41d4-a716-446655440010",
+            "name": "Ancient Key",
+            "hint": "This brass key looks old but sturdy. It might open a locked door.",
+            "description": "A heavy brass key with mysterious engravings"
+          }
+        ]
+      }
+    },
+    {
+      "userId": "550e8400-e29b-41d4-a716-446655440001",
+      "username": "Player2",
+      "password": "hashed_password_456",
+      "level": 2,
+      "currentRoomId": "room_chamber",
+      "playerState": {
+        "worldX": 2400,
+        "worldY": 1200,
+        "speed": 4,
+        "direction": "up",
+        "solidArea": {
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        "collisionOn": false,
+        "spriteImages": {
+          "u1": "/images/player.png",
+          "u2": "/images/player.png",
+          "d1": "/images/player.png",
+          "d2": "/images/player.png",
+          "l1": "/images/player.png",
+          "l2": "/images/player.png",
+          "r1": "/images/player.png",
+          "r2": "/images/player.png"
+        }
+      },
+      "inventory": {
+        "inventoryId": "inv_002",
+        "maxCapacity": 10,
+        "items": [
+          {
+            "itemID": "550e8400-e29b-41d4-a716-446655440011",
+            "name": "Torn Journal Page",
+            "hint": "The faded writing mentions 'the pattern in the stones reveals the path'",
+            "description": "A yellowed page with cryptic notes about stone patterns"
+          },
+          {
+            "itemID": "550e8400-e29b-41d4-a716-446655440012",
+            "name": "Crystal Shard",
+            "hint": "When held up to light, it reveals hidden markings on the walls",
+            "description": "A translucent crystal that glows faintly"
+          }
+        ]
+      }
+    }
+  ]
+}

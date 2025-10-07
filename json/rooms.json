@@ -1,0 +1,140 @@
+{
+  "game_config": {
+    "display": {
+      "originalTileSize": 16,
+      "scale": 3,
+      "tileSize": 48,
+      "maxScreenCol": 16,
+      "maxScreenRow": 12,
+      "screenWidth": 768,
+      "screenHeight": 576
+    },
+    "world": {
+      "maxWorldCol": 50,
+      "maxWorldRow": 50,
+      "worldWidth": 2400,
+      "worldHeight": 2400
+    },
+    "gameplay": {
+      "fps": 60,
+      "gameStates": {
+        "playState": 1,
+        "pauseState": 2,
+        "dialogueState": 3
+      }
+    }
+  },
+  "tiles": [
+    {
+      "tileId": 0,
+      "name": "Grass",
+      "imagePath": "newgrass.png",
+      "collision": false,
+      "isSpecial": false
+    },
+    {
+      "tileId": 1,
+      "name": "Purple Stone",
+      "imagePath": "purble.png",
+      "collision": false,
+      "isSpecial": false
+    },
+    {
+      "tileId": 2,
+      "name": "Gold Block",
+      "imagePath": "goldblock.png",
+      "collision": false,
+      "isSpecial": true
+    },
+    {
+      "tileId": 3,
+      "name": "Barrier",
+      "imagePath": "barrier.png",
+      "collision": true,
+      "isSpecial": false
+    }
+  ],
+  "rooms": [
+    {
+      "roomId": "room_library",
+      "name": "The Forgotten Library",
+      "description": "A mysterious library filled with ancient tomes and hidden secrets. Find the way through the knowledge.",
+      "mapFile": "map2.txt",
+      "music": "library_ambient.mp3",
+      "puzzle": {
+        "puzzleId": "puzzle_001",
+        "title": "The Forgotten Library",
+        "description": "A mysterious library filled with ancient tomes and hidden secrets. Find the way through the knowledge.",
+        "level": 1,
+        "isSolved": false
+      },
+      "dialogue": {
+        "dialogueId": "library_dialogue",
+        "dialogueFile": "library_dialogue.txt",
+        "dialogues": [
+          "You enter a vast library...",
+          "Ancient books line the walls.",
+          "Something feels wrong here.",
+          "You must find the way forward."
+        ]
+      },
+      "availableItems": [
+        "550e8400-e29b-41d4-a716-446655440010",
+        "550e8400-e29b-41d4-a716-446655440013"
+      ]
+    },
+    {
+      "roomId": "room_chamber",
+      "name": "The Cursed Chamber",
+      "description": "A dark chamber where shadows whisper secrets. Navigate the maze of darkness to find the truth.",
+      "mapFile": "map4.txt",
+      "music": "chamber_dark.mp3",
+      "puzzle": {
+        "puzzleId": "puzzle_002",
+        "title": "The Cursed Chamber",
+        "description": "A dark chamber where shadows whisper secrets. Navigate the maze of darkness to find the truth.",
+        "level": 2,
+        "isSolved": false
+      },
+      "dialogue": {
+        "dialogueId": "chamber_dialogue",
+        "dialogueFile": "chamber_dialogue.txt",
+        "dialogues": [
+          "The chamber grows darker...",
+          "You hear whispers in the shadows.",
+          "The exit must be nearby.",
+          "Keep moving forward."
+        ]
+      },
+      "availableItems": [
+        "550e8400-e29b-41d4-a716-446655440011",
+        "550e8400-e29b-41d4-a716-446655440012"
+      ]
+    },
+    {
+      "roomId": "room_entrance",
+      "name": "Entrance Hall",
+      "description": "The starting point of your escape room adventure. Welcome messages guide you forward.",
+      "mapFile": "map1.txt",
+      "music": "intro_ambient.mp3",
+      "puzzle": {
+        "puzzleId": "puzzle_000",
+        "title": "Welcome Challenge",
+        "description": "Learn the basics of the escape room.",
+        "level": 0,
+        "isSolved": false
+      },
+      "dialogue": {
+        "dialogueId": "intro_dialogue",
+        "dialogueFile": "intro.txt",
+        "dialogues": [
+          "Welcome to the Escape Room",
+          "Make sure to have fun",
+          "Now go and escape!",
+          "Ciao!"
+        ]
+      },
+      "availableItems": []
+    }
+  ]
+}

@@ -1,0 +1,686 @@
+{
+  "game_config": {
+    "title": "Hollowmore Manor",
+    "time_limit_minutes": 45,
+    "theme": "horror_mystery",
+    "player_start_room": "foyer"
+  },
+  "rooms": [
+    {
+      "roomId": "foyer",
+      "name": "The Foyer",
+      "description": "The entry hall is lined with broken furniture, a chalk outline on the floor, and a wall murder-board with pinned names.",
+      "mapFile": "maps/foyer.txt",
+      "background": "foyer_bg.png",
+      "music": "ambient_horror.mp3",
+      "puzzle": {
+        "puzzleId": "foyer_ledger",
+        "type": "LEDGER_ASSEMBLY",
+        "title": "Torn Ledger Pages",
+        "description": "Collect torn pages scattered around the room and reassemble them to reveal victim information.",
+        "difficulty": "EASY",
+        "solution": "1847",
+        "hints": [
+          "The pages contain dates and initials.",
+          "Look for a pattern in the death dates.",
+          "The last two digits of each date might be important."
+        ]
+      },
+      "interactiveObjects": [
+        {
+          "objectId": "credenza",
+          "name": "Locked Credenza",
+          "type": "CONTAINER",
+          "x": 300,
+          "y": 400,
+          "sprite": "credenza.png",
+          "locked": true,
+          "unlockCode": "1847",
+          "containsItems": ["diary_scrap_1", "flashlight"],
+          "description": "A dusty credenza with a 4-digit lock."
+        },
+        {
+          "objectId": "ledger_page_1",
+          "name": "Torn Page",
+          "type": "COLLECTIBLE",
+          "x": 150,
+          "y": 200,
+          "sprite": "page1.png",
+          "collectible": true,
+          "evidenceValue": "Victim 1: J.M. - 03/18/47"
+        },
+        {
+          "objectId": "ledger_page_2",
+          "name": "Torn Page",
+          "type": "COLLECTIBLE",
+          "x": 500,
+          "y": 150,
+          "sprite": "page2.png",
+          "collectible": true,
+          "evidenceValue": "Victim 2: A.R. - 07/22/47"
+        },
+        {
+          "objectId": "ledger_page_3",
+          "name": "Torn Page",
+          "type": "COLLECTIBLE",
+          "x": 350,
+          "y": 300,
+          "sprite": "page3.png",
+          "collectible": true,
+          "evidenceValue": "Victim 3: L.K. - 11/09/47"
+        },
+        {
+          "objectId": "murder_board",
+          "name": "Murder Board",
+          "type": "EXAMINE",
+          "x": 400,
+          "y": 100,
+          "sprite": "murder_board.png",
+          "description": "A cork board with photos connected by red string. Names are crossed out."
+        }
+      ],
+      "dialogue": {
+        "onEnter": [
+          "The town calls it Hollowmore.",
+          "They say it remembers those who enter... and keeps them."
+        ],
+        "onPuzzleSolved": [
+          "The credenza clicks open.",
+          "Inside, you find a torn diary page and an old flashlight."
+        ]
+      },
+      "dynamicEvents": [
+        {
+          "eventType": "LIGHTS_FLICKER",
+          "triggerCondition": "PUZZLE_SOLVED",
+          "description": "The lights flicker ominously."
+        },
+        {
+          "eventType": "AUDIO_PLAY",
+          "triggerCondition": "PUZZLE_SOLVED",
+          "audioFile": "voicemail.mp3",
+          "transcript": "I had to teach them a lesson..."
+        }
+      ],
+      "exitTo": "parlor"
+    },
+    {
+      "roomId": "parlor",
+      "name": "The Parlor",
+      "description": "Dusty furniture fills the room. Portraits hang on the walls, one with gouged-out eyes. A safe hums behind it.",
+      "mapFile": "maps/parlor.txt",
+      "background": "parlor_bg.png",
+      "music": "unsettling_melody.mp3",
+      "puzzle": {
+        "puzzleId": "parlor_portraits",
+        "type": "PORTRAIT_EYES",
+        "title": "Portrait Eyes",
+        "description": "Adjust the portraits so their eyes match the victim descriptions.",
+        "difficulty": "EASY_MEDIUM",
+        "solution": ["BLUE", "BROWN", "GREEN", "HAZEL"],
+        "hints": [
+          "Check the ledger for eye color descriptions.",
+          "The portraits are in chronological order.",
+          "Blue eyes, brown eyes, green eyes, hazel eyes."
+        ]
+      },
+      "interactiveObjects": [
+        {
+          "objectId": "portrait_1",
+          "name": "Portrait of a Woman",
+          "type": "CYCLIC",
+          "x": 100,
+          "y": 150,
+          "sprite": "portrait1.png",
+          "states": ["BLUE", "BROWN", "GREEN", "HAZEL"],
+          "currentState": "BROWN",
+          "description": "A portrait with strangely lifeless eyes."
+        },
+        {
+          "objectId": "portrait_2",
+          "name": "Portrait of a Man",
+          "type": "CYCLIC",
+          "x": 250,
+          "y": 150,
+          "sprite": "portrait2.png",
+          "states": ["BLUE", "BROWN", "GREEN", "HAZEL"],
+          "currentState": "GREEN",
+          "description": "This one's eyes seem to follow you."
+        },
+        {
+          "objectId": "portrait_3",
+          "name": "Portrait with Gouged Eyes",
+          "type": "CYCLIC",
+          "x": 400,
+          "y": 150,
+          "sprite": "portrait3.png",
+          "states": ["BLUE", "BROWN", "GREEN", "HAZEL"],
+          "currentState": "BLUE",
+          "description": "The eyes have been violently removed."
+        },
+        {
+          "objectId": "portrait_4",
+          "name": "Portrait of a Child",
+          "type": "CYCLIC",
+          "x": 550,
+          "y": 150,
+          "sprite": "portrait4.png",
+          "states": ["BLUE", "BROWN", "GREEN", "HAZEL"],
+          "currentState": "HAZEL",
+          "description": "An innocent face frozen in time."
+        },
+        {
+          "objectId": "hidden_safe",
+          "name": "Wall Safe",
+          "type": "CONTAINER",
+          "x": 450,
+          "y": 200,
+          "sprite": "safe.png",
+          "locked": true,
+          "unlockCondition": "PORTRAIT_PUZZLE_SOLVED",
+          "containsItems": ["parlor_key", "diary_scrap_2"]
+        }
+      ],
+      "dialogue": {
+        "onEnter": [
+          "The portraits seem to watch your every move.",
+          "One has had its eyes violently gouged out."
+        ],
+        "onPuzzleSolved": [
+          "A clicking sound comes from behind the portrait.",
+          "The safe swings open, revealing its contents."
+        ]
+      },
+      "dynamicEvents": [
+        {
+          "eventType": "SHADOW_PASS",
+          "triggerCondition": "RANDOM",
+          "description": "A shadow passes across the upstairs balcony."
+        },
+        {
+          "eventType": "DOOR_SLAM",
+          "triggerCondition": "PUZZLE_SOLVED",
+          "audioFile": "door_slam.mp3"
+        }
+      ],
+      "exitTo": "library",
+      "requiredItem": "parlor_key"
+    },
+    {
+      "roomId": "library",
+      "name": "The Library",
+      "description": "Shelves lined with rotting books. A phonograph plays a warped lullaby. A diary lies half-burned on the desk.",
+      "mapFile": "maps/library.txt",
+      "background": "library_bg.png",
+      "music": "warped_lullaby.mp3",
+      "puzzle": {
+        "puzzleId": "library_cipher",
+        "type": "CIPHER_DECODE",
+        "title": "Ciphered Diary",
+        "description": "Decode the scrambled diary text using the cipher hint.",
+        "difficulty": "MEDIUM",
+        "cipherType": "CAESAR",
+        "shift": 3,
+        "encryptedText": "WKH JUHHQKRXVH KROGV WKH ILQDO VHFUHW",
+        "solution": "THE GREENHOUSE HOLDS THE FINAL SECRET",
+        "hints": [
+          "The phonograph label shows a number: 3",
+          "Try shifting each letter by that amount.",
+          "A becomes D, B becomes E, etc."
+        ]
+      },
+      "interactiveObjects": [
+        {
+          "objectId": "burned_diary",
+          "name": "Half-Burned Diary",
+          "type": "EXAMINE",
+          "x": 400,
+          "y": 300,
+          "sprite": "diary.png",
+          "description": "The text is scrambled and barely readable.",
+          "containsText": "WKH JUHHQKRXVH KROGV WKH ILQDO VHFUHW"
+        },
+        {
+          "objectId": "phonograph",
+          "name": "Antique Phonograph",
+          "type": "AUDIO_PLAYER",
+          "x": 200,
+          "y": 250,
+          "sprite": "phonograph.png",
+          "audioFile": "warped_lullaby.mp3",
+          "description": "The record label reads: 'Shift by 3'"
+        },
+        {
+          "objectId": "bookshelf",
+          "name": "Rotting Bookshelf",
+          "type": "CONTAINER",
+          "x": 100,
+          "y": 200,
+          "sprite": "bookshelf.png",
+          "containsItems": ["safe_code_note", "greenhouse_key"],
+          "unlockCondition": "CIPHER_SOLVED"
+        },
+        {
+          "objectId": "window",
+          "name": "Foggy Window",
+          "type": "EXAMINE",
+          "x": 600,
+          "y": 150,
+          "sprite": "window.png",
+          "description": "Words appear in the fog: 'You shouldn't have read that.'"
+        }
+      ],
+      "dialogue": {
+        "onEnter": [
+          "The air smells of burnt paper and decay.",
+          "A phonograph plays a distorted melody."
+        ],
+        "onPuzzleSolved": [
+          "The text becomes clear: THE GREENHOUSE HOLDS THE FINAL SECRET",
+          "A section of the bookshelf clicks open."
+        ]
+      },
+      "dynamicEvents": [
+        {
+          "eventType": "WINDOW_MESSAGE",
+          "triggerCondition": "PUZZLE_SOLVED",
+          "description": "Condensation forms words on the window."
+        }
+      ],
+      "exitTo": "kitchen"
+    },
+    {
+      "roomId": "kitchen",
+      "name": "The Kitchen",
+      "description": "A dining table set for six. Chairs are overturned, cutlery scattered. One knife is missing.",
+      "mapFile": "maps/kitchen.txt",
+      "background": "kitchen_bg.png",
+      "music": "tension_ambient.mp3",
+      "puzzle": {
+        "puzzleId": "kitchen_knives",
+        "type": "ITEM_ARRANGEMENT",
+        "title": "Missing Knives",
+        "description": "Arrange the table settings correctly based on the journal notes.",
+        "difficulty": "MEDIUM",
+        "solution": ["FORK_LEFT", "PLATE_CENTER", "KNIFE_RIGHT", "SPOON_FAR_RIGHT"],
+        "hints": [
+          "Check the diary scraps for table etiquette notes.",
+          "Fork on left, knife on right, spoon outer right.",
+          "One knife is hidden - where could it be?"
+        ]
+      },
+      "interactiveObjects": [
+        {
+          "objectId": "dining_table",
+          "name": "Dining Table",
+          "type": "PUZZLE_SURFACE",
+          "x": 384,
+          "y": 300,
+          "sprite": "table.png",
+          "description": "Set for six, but everything is in disarray."
+        },
+        {
+          "objectId": "cutlery_1",
+          "name": "Silver Fork",
+          "type": "DRAGGABLE",
+          "x": 200,
+          "y": 400,
+          "sprite": "fork.png"
+        },
+        {
+          "objectId": "cutlery_2",
+          "name": "Dinner Knife",
+          "type": "DRAGGABLE",
+          "x": 300,
+          "y": 350,
+          "sprite": "knife.png"
+        },
+        {
+          "objectId": "cutlery_3",
+          "name": "Silver Spoon",
+          "type": "DRAGGABLE",
+          "x": 450,
+          "y": 380,
+          "sprite": "spoon.png"
+        },
+        {
+          "objectId": "hidden_knife",
+          "name": "Bloodstained Knife",
+          "type": "COLLECTIBLE",
+          "x": 150,
+          "y": 450,
+          "sprite": "bloody_knife.png",
+          "hidden": true,
+          "revealCondition": "PUZZLE_SOLVED",
+          "containsItems": ["diary_scrap_3", "victim_map"]
+        }
+      ],
+      "dialogue": {
+        "onEnter": [
+          "The table was set for dinner that never happened.",
+          "You hear footsteps in the hallway... but no one enters."
+        ],
+        "onPuzzleSolved": [
+          "The centerpiece shifts, revealing a hidden compartment.",
+          "Inside is the final diary scrap and a map of victims."
+        ]
+      },
+      "dynamicEvents": [
+        {
+          "eventType": "FOOTSTEPS",
+          "triggerCondition": "RANDOM",
+          "audioFile": "footsteps_approach.mp3",
+          "description": "Footsteps grow louder, then stop."
+        }
+      ],
+      "exitTo": "greenhouse",
+      "requiredItem": "greenhouse_key"
+    },
+    {
+      "roomId": "greenhouse",
+      "name": "The Greenhouse",
+      "description": "Creeping vines, broken glass, mannequins staged like murder victims. Marionette tokens scattered among them.",
+      "mapFile": "maps/greenhouse.txt",
+      "background": "greenhouse_bg.png",
+      "music": "eerie_whispers.mp3",
+      "puzzle": {
+        "puzzleId": "greenhouse_logic",
+        "type": "LOGIC_GRID",
+        "title": "Victim Pattern",
+        "description": "Deduce who was killed with what weapon, at what time.",
+        "difficulty": "MEDIUM_HARD",
+        "victims": ["J.M.", "A.R.", "L.K.", "S.T."],
+        "weapons": ["Knife", "Rope", "Poison", "Blunt"],
+        "times": ["Midnight", "3AM", "Dawn", "Noon"],
+        "solution": {
+          "J.M.": {"weapon": "Knife", "time": "Midnight"},
+          "A.R.": {"weapon": "Rope", "time": "3AM"},
+          "L.K.": {"weapon": "Poison", "time": "Dawn"},
+          "S.T.": {"weapon": "Blunt", "time": "Noon"}
+        },
+        "clues": [
+          "J.M. was killed at midnight, but not with poison.",
+          "The rope murder happened at 3AM.",
+          "L.K. was poisoned at dawn.",
+          "S.T. was not killed with a knife or rope."
+        ]
+      },
+      "interactiveObjects": [
+        {
+          "objectId": "mannequin_1",
+          "name": "Mannequin - J.M.",
+          "type": "EVIDENCE_HOLDER",
+          "x": 150,
+          "y": 250,
+          "sprite": "mannequin1.png",
+          "correctItem": "knife_token"
+        },
+        {
+          "objectId": "mannequin_2",
+          "name": "Mannequin - A.R.",
+          "type": "EVIDENCE_HOLDER",
+          "x": 300,
+          "y": 250,
+          "sprite": "mannequin2.png",
+          "correctItem": "rope_token"
+        },
+        {
+          "objectId": "mannequin_3",
+          "name": "Mannequin - L.K.",
+          "type": "EVIDENCE_HOLDER",
+          "x": 450,
+          "y": 250,
+          "sprite": "mannequin3.png",
+          "correctItem": "poison_token"
+        },
+        {
+          "objectId": "mannequin_4",
+          "name": "Mannequin - S.T.",
+          "type": "EVIDENCE_HOLDER",
+          "x": 600,
+          "y": 250,
+          "sprite": "mannequin4.png",
+          "correctItem": "blunt_token"
+        },
+        {
+          "objectId": "token_knife",
+          "name": "Knife Token",
+          "type": "DRAGGABLE",
+          "x": 200,
+          "y": 400,
+          "sprite": "token_knife.png"
+        },
+        {
+          "objectId": "token_rope",
+          "name": "Rope Token",
+          "type": "DRAGGABLE",
+          "x": 300,
+          "y": 400,
+          "sprite": "token_rope.png"
+        },
+        {
+          "objectId": "token_poison",
+          "name": "Poison Token",
+          "type": "DRAGGABLE",
+          "x": 400,
+          "y": 400,
+          "sprite": "token_poison.png"
+        },
+        {
+          "objectId": "token_blunt",
+          "name": "Blunt Token",
+          "type": "DRAGGABLE",
+          "x": 500,
+          "y": 400,
+          "sprite": "token_blunt.png"
+        }
+      ],
+      "dialogue": {
+        "onEnter": [
+          "The mannequins are arranged like a tableau.",
+          "Each represents one of the Hollowmaker's victims."
+        ],
+        "onPuzzleSolved": [
+          "The cellar door clicks open.",
+          "A whisper in your ear: 'You're almost part of the performance.'"
+        ]
+      },
+      "dynamicEvents": [
+        {
+          "eventType": "WHISPER",
+          "triggerCondition": "PUZZLE_SOLVED",
+          "audioFile": "whisper.mp3",
+          "transcript": "You're almost part of the performance."
+        }
+      ],
+      "exitTo": "cellar"
+    },
+    {
+      "roomId": "cellar",
+      "name": "The Cellar - Marionette Room",
+      "description": "A stage-like space with ropes hanging from above. A grand marionette sits at the center. Slots await the tokens you've found.",
+      "mapFile": "maps/cellar.txt",
+      "background": "cellar_bg.png",
+      "music": "final_tension.mp3",
+      "puzzle": {
+        "puzzleId": "cellar_final",
+        "type": "TOKEN_SEQUENCE",
+        "title": "Final Performance",
+        "description": "Place the marionette tokens in the correct order to reveal the killer's confession.",
+        "difficulty": "HARD",
+        "solution": ["TOKEN_1847", "TOKEN_DIARY", "TOKEN_KEY", "TOKEN_WEAPON"],
+        "hints": [
+          "The order follows the timeline of murders.",
+          "Think chronologically - first victim to last.",
+          "The phonograph melody matches the sequence."
+        ]
+      },
+      "interactiveObjects": [
+        {
+          "objectId": "marionette_stage",
+          "name": "Marionette Stage",
+          "type": "PUZZLE_SURFACE",
+          "x": 384,
+          "y": 250,
+          "sprite": "stage.png",
+          "slots": 4
+        },
+        {
+          "objectId": "slot_1",
+          "name": "First Slot",
+          "type": "TOKEN_SLOT",
+          "x": 250,
+          "y": 300,
+          "correctToken": "TOKEN_1847"
+        },
+        {
+          "objectId": "slot_2",
+          "name": "Second Slot",
+          "type": "TOKEN_SLOT",
+          "x": 350,
+          "y": 300,
+          "correctToken": "TOKEN_DIARY"
+        },
+        {
+          "objectId": "slot_3",
+          "name": "Third Slot",
+          "type": "TOKEN_SLOT",
+          "x": 450,
+          "y": 300,
+          "correctToken": "TOKEN_KEY"
+        },
+        {
+          "objectId": "slot_4",
+          "name": "Fourth Slot",
+          "type": "TOKEN_SLOT",
+          "x": 550,
+          "y": 300,
+          "correctToken": "TOKEN_WEAPON"
+        },
+        {
+          "objectId": "confession_chamber",
+          "name": "Locked Chamber",
+          "type": "CONTAINER",
+          "x": 384,
+          "y": 150,
+          "sprite": "chamber.png",
+          "locked": true,
+          "unlockCondition": "FINAL_PUZZLE_SOLVED"
+        }
+      ],
+      "dialogue": {
+        "onEnter": [
+          "This is where the Hollowmaker stages their 'performances'.",
+          "The marionette's eyes seem to follow you.",
+          "You hear breathing... but you're alone. Or are you?"
+        ],
+        "onPuzzleSolved": [
+          "The chamber opens, revealing the killer's confession.",
+          "A recording plays: 'They were all part of the show...'",
+          "Behind you, a lantern light glows. The killer has arrived."
+        ]
+      },
+      "dynamicEvents": [
+        {
+          "eventType": "KILLER_ARRIVES",
+          "triggerCondition": "PUZZLE_SOLVED",
+          "description": "A figure appears in the doorway."
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "itemId": "diary_scrap_1",
+      "name": "Diary Scrap - Part 1",
+      "type": "EVIDENCE",
+      "sprite": "diary1.png",
+      "description": "A torn page mentioning the first victim.",
+      "evidenceText": "J.M. - Blue eyes, taken at midnight. The performance begins."
+    },
+    {
+      "itemId": "diary_scrap_2",
+      "name": "Diary Scrap - Part 2",
+      "type": "EVIDENCE",
+      "sprite": "diary2.png",
+      "description": "Another page describing the second victim.",
+      "evidenceText": "A.R. - Brown eyes, the rope danced at 3AM."
+    },
+    {
+      "itemId": "diary_scrap_3",
+      "name": "Diary Scrap - Part 3",
+      "type": "EVIDENCE",
+      "sprite": "diary3.png",
+      "description": "The final page revealing the pattern.",
+      "evidenceText": "L.K. - Green eyes, poison at dawn. S.T. - Hazel eyes, the final act at noon."
+    },
+    {
+      "itemId": "flashlight",
+      "name": "Flashlight",
+      "type": "TOOL",
+      "sprite": "flashlight.png",
+      "description": "An old but functional flashlight."
+    },
+    {
+      "itemId": "parlor_key",
+      "name": "Brass Key",
+      "type": "KEY",
+      "sprite": "key.png",
+      "description": "Opens the door to the Library.",
+      "unlocks": "library"
+    },
+    {
+      "itemId": "greenhouse_key",
+      "name": "Iron Key",
+      "type": "KEY",
+      "sprite": "key_iron.png",
+      "description": "Opens the greenhouse door.",
+      "unlocks": "greenhouse"
+    },
+    {
+      "itemId": "victim_map",
+      "name": "Victim Map",
+      "type": "EVIDENCE",
+      "sprite": "map.png",
+      "description": "A map showing where each victim was found.",
+      "evidenceText": "Map marks locations throughout the manor."
+    },
+    {
+      "itemId": "safe_code_note",
+      "name": "Code Note",
+      "type": "CLUE",
+      "sprite": "note.png",
+      "description": "A note with numbers: 1-8-4-7"
+    }
+  ],
+  "endings": [
+    {
+      "endingId": "WIN",
+      "title": "Captured",
+      "condition": "ALL_EVIDENCE_COLLECTED && PUZZLE_SOLVED && TIME_REMAINING > 0",
+      "description": "You assembled all the evidence and solved the final puzzle. Police sirens wail outside as you escape through the hidden passage. The Hollowmaker is finally caught.",
+      "outcomeText": "VICTORY: The nightmare ends. The Hollowmaker's reign of terror is over."
+    },
+    {
+      "endingId": "PARTIAL_WIN",
+      "title": "Unresolved",
+      "condition": "PUZZLE_SOLVED && EVIDENCE_COLLECTED < 3",
+      "description": "You escape the manor, but without enough evidence, the Hollowmaker remains free. As you drive away, you notice a token on your car seat that wasn't there before.",
+      "outcomeText": "ESCAPE: You survived, but the killer lives on."
+    },
+    {
+      "endingId": "FRAMED",
+      "title": "The Accused",
+      "condition": "WRONG_EVIDENCE_SEQUENCE",
+      "description": "The evidence points to you. When the police arrive, they find you holding the murder weapon. Your protests fall on deaf ears.",
+      "outcomeText": "FRAMED: They think you're the Hollowmaker."
+    },
+    {
+      "endingId": "FAIL",
+      "title": "The Final Victim",
+      "condition": "TIME_EXPIRED || WRONG_FINAL_CHOICE",
+      "description": "Time runs out. The killer steps from the shadows, marionette strings in hand. You become the final piece in their twisted performance.",
+      "outcomeText": "GAME OVER: The Hollowmaker claims another victim."
+    }
+  ]
+}
